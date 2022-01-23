@@ -1,6 +1,5 @@
 from pips import Pips
 
-
 class Yatzy:
 
     @staticmethod
