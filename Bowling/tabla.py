@@ -5,6 +5,7 @@ class Tabla():
         self.puntos = puntos
         self.tabla_limpia = []
         self.longitud_tabla = longitud_tabla
+        self.set_tabla()
 
     def set_tabla(self):
         self.set_tabla_limpia()
@@ -15,9 +16,10 @@ class Tabla():
             if len(tabla_turno) == 2:
                 self.tabla.append(tabla_turno)
                 tabla_turno = [puntos[tiros]]
-            elif puntos[tiros - 1] == 'X':
-                self.tabla.append(tabla_turno)
+            elif puntos[tiros] == 'X':
                 tabla_turno = [puntos[tiros]]
+                self.tabla.append(tabla_turno)        
+                tabla_turno = []        
             else:
                 tabla_turno.append(puntos[tiros])
             tiros += 1

@@ -1,3 +1,5 @@
+from tabla import Tabla
+
 class Bowling:
 
     ## Globals ##
@@ -5,9 +7,10 @@ class Bowling:
     SPARE = '/'
     NO_PINS_BOWLED = '-'
 
-    def __init__(self,tabla=[]):
+    def __init__(self,tabla=""):
         self.puntuacion = 0
-        self.tabla = tabla
+        self.tabla = Tabla(tabla).get_tabla()
+        self.set_puntuacion()
             
     def set_puntuacion(self):
         num_turno = 0
@@ -37,7 +40,7 @@ class Bowling:
     def __strike(self,num_turno):
         try:
             if len(self.tabla[num_turno + 1]) >= 2:
-                return  10 +  self.__puntos_netos_turno(self.tabla[num_turno + 1])
+                return  10 +  self.__puntos_netos_turno(self.tabla[num_turno + 1][:2])
             else:
                 return 10 + self.__puntos_netos_turno(self.tabla[num_turno + 1]) + self.__puntos_netos_tiro(self.tabla[num_turno + 2][0])
         except:
@@ -72,42 +75,35 @@ class Bowling:
 
 if __name__ == '__main__':
 
-    bowling = Bowling([[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]])
-    bowling.set_puntuacion()
+    bowling = Bowling("11111111111111111111")
     assert  20 ==  bowling.get_puntuacion()
     
-    bowling = Bowling([[9,0],[9,0],[9,0],[9,0],[9,0],[9,0],[9,0],[9,0],[9,0],[9,0]])
-    bowling.set_puntuacion()
+    bowling = Bowling("9-9-9-9-9-9-9-9-9-9-")
     assert 90 == bowling.get_puntuacion()
 
-    bowling = Bowling([[5,'/'],[5,'/'],[5,'/'],[5,'/'],[5,'/'],[5,'/'],[5,'/'],[5,'/'],[5,'/'],[5,'/',5]])
-    bowling.set_puntuacion()
+    bowling = Bowling("5/5/5/5/5/5/5/5/5/5/5")
     assert 150 == bowling.get_puntuacion()
 
-    bowling = Bowling([[9,'-'],[3,'/'],[6,1],[3,'/'],[8,1],[5,'/'],['-','/'],[8,'-'],[7,'/'],[8,'/',8]])
-    bowling.set_puntuacion()
+    bowling = Bowling("9-3/613/815/-/8-7/8/8")
     assert 131 == bowling.get_puntuacion()
 
-    bowling = Bowling([['X'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-']])
-    bowling.set_puntuacion()
+    bowling = Bowling('X9-9-9-9-9-9-9-9-9-')
     assert 100 == bowling.get_puntuacion()
 
-    bowling = Bowling([['X'],['X'],[8,'-'],[4,4],[4,4],[4,4],[4,4],[4,4],[4,4],[4,4]])
-    bowling.set_puntuacion()
+    bowling = Bowling('XX8-44444444444444')
     assert 110 == bowling.get_puntuacion()
 
-    bowling = Bowling([['X'],['X'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-']])
-    bowling.set_puntuacion()
+    bowling = Bowling('XX9-9-9-9-9-9-9-9-')
     assert 120 == bowling.get_puntuacion()
 
-    bowling = Bowling([['X'],['X'],['X'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-']])
-    bowling.set_puntuacion()
+    bowling = Bowling('XXX9-9-9-9-9-9-9-')
     assert 141 == bowling.get_puntuacion()
 
-    bowling = Bowling([[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],['X','X','X']])
-    bowling.set_puntuacion()
+    bowling = Bowling('9-9-9-9-9-9-9-9-9-XXX')
     assert 111 == bowling.get_puntuacion()
 
-    bowling = Bowling([['X'],['X'],[8,'-'],[4,4],[4,4],[4,4],[4,4],[4,4],[4,4],[4,4]])
-    bowling.set_puntuacion()
+    bowling = Bowling('XX8-44444444444444')
     assert 110 == bowling.get_puntuacion()
+
+    bowling = Bowling('XXXXXXXXXXXX')
+    assert 300 == bowling.get_puntuacion()
