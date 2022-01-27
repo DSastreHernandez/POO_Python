@@ -8,17 +8,16 @@ class Tabla():
     def set_tabla(self):
         puntos = self.tabla_limpia
         tabla_turno = []
-        for element in puntos:
-            if len(tabla_turno) < 2:
-                turno = element
-                tabla_turno.append(turno)
-            else:
+        tiros = 0
+        while len(self.tabla) < 9:
+            if len(tabla_turno) == 2:
                 self.tabla.append(tabla_turno)
-                tabla_turno = [element]
-        if len(tabla_turno) == 1:
-            self.tabla[-1].append(tabla_turno[0])
-        elif len(tabla_turno) == 2:
-            self.tabla.append(tabla_turno)
+                tabla_turno = [puntos[tiros]]
+            else:
+                tabla_turno.append(puntos[tiros])
+            tiros += 1
+        
+        self.tabla.append(puntos[tiros - 1:])
 
     def get_tabla(self):
         return self.tabla
