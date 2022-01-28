@@ -26,16 +26,18 @@ class Bowling:
                     puntos_turno += self.__strike(num_turno)
             
                 elif tirada == self.SPARE:
-                    puntos_turno = self.__spare(num_turno)
+                    puntos_turno += self.__spare(num_turno) + (10 - self.__puntos_netos_tiro(tiro_anterior))
+                
+                tiro_anterior = tirada
 
             self.puntuacion += puntos_turno
             num_turno += 1
 
     def __spare(self,num_turno):
         try:
-            return 10 + self.tabla[num_turno + 1][0]
+            return self.__puntos_netos_tiro(self.tabla[num_turno + 1][0])
         except:
-            return 10  
+            return 0  
 
     def __strike(self,num_turno):
         try:
@@ -111,3 +113,7 @@ if __name__ == '__main__':
     assert 111 == Bowling("9-9-9-9-9-9-9-9-9-XXX").get_puntuacion()
 
     assert 149 == Bowling("8/549-XX5/53639/9/X").get_puntuacion()
+
+    assert 175 == Bowling("X5/X5/XX5/--5/X5/").get_puntuacion()
+
+    assert 165 == Bowling("-/X9/5/33X33XX9/X").get_puntuacion()
