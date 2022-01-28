@@ -13,18 +13,20 @@ class Tabla():
         tabla_turno = []
         tiros = 0
         while len(self.tabla) < self.longitud_tabla - 1:
+
+            tabla_turno.append(puntos[tiros])
+
             if len(tabla_turno) == 2:
                 self.tabla.append(tabla_turno)
-                tabla_turno = [puntos[tiros]]
-            elif puntos[tiros] == 'X':
-                tabla_turno = [puntos[tiros]]
-                self.tabla.append(tabla_turno)        
                 tabla_turno = []        
-            else:
-                tabla_turno.append(puntos[tiros])
+
+            elif tabla_turno[0] == 'X':  
+                self.tabla.append(['X'])   
+                tabla_turno = []        
+    
             tiros += 1
         
-        self.tabla.append(puntos[tiros - 1:])
+        self.tabla.append(puntos[tiros:])
 
     def get_tabla(self):
         return self.tabla
@@ -40,13 +42,10 @@ class Tabla():
 if __name__ == '__main__':
 
     tabla = Tabla("9-9-9-9-9-9-9-9-9-9-")
-    tabla.set_tabla()
     assert tabla.get_tabla() == [[9,'-'], [9,'-'], [9,'-'], [9,'-'], [9,'-'], [9,'-'], [9,'-'], [9,'-'], [9,'-'], [9,'-']] 
 
-    tabla = Tabla("5/5/5/5/5/5/5/5/5/5/5")  
-    tabla.set_tabla()
+    tabla = Tabla("5/5/5/5/5/5/5/5/5/5/5")
     assert tabla.get_tabla() == [[5,'/'],[5,'/'],[5,'/'],[5,'/'],[5,'/'],[5,'/'],[5,'/'],[5,'/'],[5,'/'],[5,'/',5]]
 
     tabla = Tabla("X9-9-9-9-9-9-9-9-9-")
-    tabla.set_tabla()
     assert tabla.get_tabla() == [['X'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-'],[9,'-']]

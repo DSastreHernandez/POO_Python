@@ -50,7 +50,7 @@ class Bowling:
         
     def __puntos_netos_turno(self,turno):
         if turno[0] == self.STRIKE:
-            return 10
+            return 10 * turno.count(self.STRIKE)
         elif turno[-1] == self.SPARE:
             return 10
         else:
@@ -107,3 +107,7 @@ if __name__ == '__main__':
 
     bowling = Bowling('XXXXXXXXXXXX')
     assert 300 == bowling.get_puntuacion()
+
+    assert 111 == Bowling("9-9-9-9-9-9-9-9-9-XXX").get_puntuacion()
+
+    assert 149 == Bowling("8/549-XX5/53639/9/X").get_puntuacion()
