@@ -4,7 +4,7 @@ Kata about refactoring and TDD from the book [The Coding Dojo Handbook, a practi
 
 This is the README.MD file published at https://github.com/emilybache/Yatzy-Refactoring-Kata.
 
-All credit to Emily Bache.
+All credit to Emily Bache and [David Gelpi Fleta](https://github.com/dfleta).
 
 --------------------------
 
